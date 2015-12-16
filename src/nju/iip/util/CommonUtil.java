@@ -11,7 +11,7 @@ public class CommonUtil {
 	private static final Logger logger = LoggerFactory.getLogger(CommonUtil.class);
 	
 	@SuppressWarnings("unchecked")
-	public WechatPost parseXml(String xml) {
+	public static WechatPost parseXml(String xml) {
 		// 将解析结果存储在HashMap中
 		WechatPost wechatPost = new WechatPost();
 		try{

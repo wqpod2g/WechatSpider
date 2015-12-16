@@ -2,7 +2,10 @@ package nju.iip.spider;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import nju.iip.model.WechatPost;
+import nju.iip.util.CommonUtil;
 import nju.iip.util.HttpUtil;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -53,9 +56,13 @@ public class WechatSpider implements Runnable{
 
 	public static void main(String[] args) {
 		WechatSpider spider = new WechatSpider();
-		String xml = spider.getJson(spider.getOpenidAndExt("infoQ")).getString("items");
+		JSONObject json = spider.getJson(spider.getOpenidAndExt("infoQ"));
+		String xml = json.getString("items");
+		int totalPages = Integer.valueOf(json.getString("totalPages"));
 		JSONArray array = JSONArray.fromObject(xml);
+		
 		logger.info("xml=" + array.get(0).toString());
+		WechatPost post = CommonUtil.parseXml(array.get(0).toString());
 	}
 
 
